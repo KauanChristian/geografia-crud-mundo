@@ -10,6 +10,7 @@ function render_header(string $title, string $active = ''): void
         'cidades' => ['label' => 'Cidades', 'path' => 'cidades.php'],
         'governantes' => ['label' => 'Governantes', 'path' => 'governantes.php'],
     ];
+    $user = current_user();
     $flashes = pull_flashes();
     ?>
 <!doctype html>
@@ -34,6 +35,16 @@ function render_header(string $title, string $active = ''): void
             <input id="global-search-input" name="q" type="search" placeholder="Buscar país ou cidade" autocomplete="off" data-global-search-input>
             <div class="search-results" data-search-results hidden aria-live="polite"></div>
         </form>
+        <?php if ($user !== null): ?>
+            <div class="account-actions">
+                <span class="account-name" title="<?= e($user['login']) ?>">Olá, <?= e($user['nome']) ?></span>
+                <a href="<?= e(url('senha.php')) ?>">Senha</a>
+                <form class="logout-form" action="<?= e(url('backend/actions/sair.php')) ?>" method="post">
+                    <input type="hidden" name="_csrf" value="<?= e(csrf_token()) ?>">
+                    <button type="submit">Sair</button>
+                </form>
+            </div>
+        <?php endif; ?>
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" data-menu-toggle>
             <span class="visually-hidden">Abrir navegação</span>
             <span aria-hidden="true">☰</span>

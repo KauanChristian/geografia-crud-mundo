@@ -34,6 +34,7 @@ try {
 }
 
 render_header((string) $definition['plural'], $entidade);
+$canManageRecords = is_administrator();
 ?>
 <section class="page-heading">
     <div>
@@ -41,7 +42,9 @@ render_header((string) $definition['plural'], $entidade);
         <h1><?= e($definition['plural']) ?></h1>
         <p><?= e($definition['description']) ?></p>
     </div>
-    <a class="button button-primary" href="<?= e(form_url($entidade)) ?>">+ Novo <?= e($definition['singular']) ?></a>
+    <?php if ($canManageRecords): ?>
+        <a class="button button-primary" href="<?= e(form_url($entidade)) ?>">+ Novo <?= e($definition['singular']) ?></a>
+    <?php endif; ?>
 </section>
 
 <?php if (isset($loadError)): ?>
@@ -65,7 +68,9 @@ render_header((string) $definition['plural'], $entidade);
         <div class="empty-state compact">
             <h3>Ainda não há <?= e(strtolower((string) $definition['plural'])) ?>.</h3>
             <p>Comece cadastrando o primeiro <?= e($definition['singular']) ?>.</p>
-            <a class="button button-primary" href="<?= e(form_url($entidade)) ?>">Cadastrar <?= e($definition['singular']) ?></a>
+            <?php if ($canManageRecords): ?>
+                <a class="button button-primary" href="<?= e(form_url($entidade)) ?>">Cadastrar <?= e($definition['singular']) ?></a>
+            <?php endif; ?>
         </div>
     <?php else: ?>
         <div class="table-wrap">
@@ -75,7 +80,7 @@ render_header((string) $definition['plural'], $entidade);
                         <?php foreach ($definition['columns'] as $column): ?>
                             <th scope="col"><?= e($column['label']) ?></th>
                         <?php endforeach; ?>
-                        <th scope="col" class="actions-column">Ações</th>
+                        <?php if ($canManageRecords): ?><th scope="col" class="actions-column">Ações</th><?php endif; ?>
                     </tr>
                 </thead>
                 <tbody>
@@ -85,15 +90,17 @@ render_header((string) $definition['plural'], $entidade);
                                 <?php $value = display_value((string) $column['key'], $record[$column['key']] ?? null); ?>
                                 <td data-label="<?= e($column['label']) ?>"<?= !empty($column['primary']) ? ' class="cell-primary"' : '' ?>><?= e($value) ?></td>
                             <?php endforeach; ?>
-                            <td class="row-actions" data-label="Ações">
-                                <a class="button button-small button-secondary" href="<?= e(form_url($entidade, (int) $record['id'])) ?>">Editar</a>
-                                <form class="inline-form" action="<?= e(url('backend/actions/excluir.php')) ?>" method="post" data-delete-form data-record-name="<?= e($record['nome']) ?>">
-                                    <input type="hidden" name="_csrf" value="<?= e(csrf_token()) ?>">
-                                    <input type="hidden" name="entidade" value="<?= e($entidade) ?>">
-                                    <input type="hidden" name="id" value="<?= (int) $record['id'] ?>">
-                                    <button class="button button-small button-danger" type="submit">Excluir</button>
-                                </form>
-                            </td>
+                            <?php if ($canManageRecords): ?>
+                                <td class="row-actions" data-label="Ações">
+                                    <a class="button button-small button-secondary" href="<?= e(form_url($entidade, (int) $record['id'])) ?>">Editar</a>
+                                    <form class="inline-form" action="<?= e(url('backend/actions/excluir.php')) ?>" method="post" data-delete-form data-record-name="<?= e($record['nome']) ?>">
+                                        <input type="hidden" name="_csrf" value="<?= e(csrf_token()) ?>">
+                                        <input type="hidden" name="entidade" value="<?= e($entidade) ?>">
+                                        <input type="hidden" name="id" value="<?= (int) $record['id'] ?>">
+                                        <button class="button button-small button-danger" type="submit">Excluir</button>
+                                    </form>
+                                </td>
+                            <?php endif; ?>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

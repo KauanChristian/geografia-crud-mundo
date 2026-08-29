@@ -24,7 +24,7 @@ Em seguida, acesse o phpMyAdmin pelo navegador:
 
 Crie/importe o banco de dados usando o arquivo:
 
-`database/bd_mundo.sql`
+`database/bd_mundo1.sql`
 
 Depois, se quiser testar o sistema já com informações cadastradas, importe também:
 
@@ -35,6 +35,27 @@ Com o banco criado e o servidor ligado, acesse o sistema pelo navegador:
 `http://localhost/mundo-crud-php-mysql/`
 
 O arquivo `index.php` não deve ser aberto diretamente com duplo clique, pois arquivos PHP precisam ser executados por um servidor.
+
+**Autenticação**
+
+Após importar `database/bd_mundo1.sql`, o banco já inclui as seguintes contas de demonstração. Todas entram com `primeiro_acesso` ativo e, após um login bem-sucedido, são direcionadas obrigatoriamente à tela de troca de senha. A nova senha é armazenada como hash no banco e o campo `primeiro_acesso` passa a ser `0`.
+
+| Usuário | Senha inicial | Tipo |
+| --- | --- | --- |
+| `admin` | `SenhaInicial0` | Administrador |
+| `ana.souza` | `SenhaInicial1` | Usuário |
+| `bruno.lima` | `SenhaInicial2` | Usuário |
+| `carla.mendes` | `SenhaInicial3` | Usuário |
+
+A nova senha deve ter pelo menos oito caracteres, uma letra maiúscula, uma minúscula e um número.
+
+Somente contas do tipo **Administrador** podem criar, editar ou excluir registros. Os demais usuários têm acesso apenas à consulta das informações.
+
+Para adicionar essas contas a um banco que já havia sido criado anteriormente, importe também `database/usuarios_exemplo.sql`.
+
+Para redefinir a senha de um administrador já existente para `SenhaInicial0`, execute `database/atualizar_senha_admin.sql`.
+
+Por segurança, três senhas incorretas consecutivas bloqueiam a conta. Para liberar um usuário bloqueado, um administrador deve atualizar o registro em `usuarios`, zerando `tentativas_falhas` e definindo `bloqueado_em` como `NULL`. Os eventos de login, bloqueio, logout e troca de senha ficam registrados na tabela `logs`.
 
 **Tecnologias Utilizadas**
 O projeto utiliza `HTML5` para estruturar as páginas, `CSS3` para estilização e responsividade, `JavaScript` para validações, confirmações de exclusão e pesquisa dinâmica, `PHP` para a lógica do sistema e comunicação com o banco, e `MySQL` para armazenamento dos dados.

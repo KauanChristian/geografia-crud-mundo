@@ -5,6 +5,8 @@ require_once __DIR__ . '/backend/includes/bootstrap.php';
 require_once __DIR__ . '/backend/includes/layout.php';
 require_once __DIR__ . '/backend/includes/form_fields.php';
 
+require_administrator();
+
 $entity = isset($_GET['entidade']) ? (string) $_GET['entidade'] : '';
 $definition = entity_definition($entity);
 

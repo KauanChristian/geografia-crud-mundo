@@ -146,6 +146,45 @@ button {
     margin-left: auto;
 }
 
+.account-actions {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 10px;
+    color: var(--muted);
+    font-size: 0.84rem;
+    font-weight: 700;
+}
+
+.account-actions a {
+    color: var(--brand-dark);
+    text-decoration: none;
+}
+
+.account-actions a:hover {
+    text-decoration: underline;
+}
+
+.logout-form button {
+    padding: 0;
+    color: var(--brand-dark);
+    font: inherit;
+    font-weight: inherit;
+    background: transparent;
+    border: 0;
+}
+
+.logout-form button:hover {
+    text-decoration: underline;
+}
+
+.account-name {
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 .global-search input,
 .table-search input {
     width: 100%;
@@ -397,6 +436,56 @@ h2 {
     border: 1px solid var(--line);
     border-radius: var(--radius);
     box-shadow: 0 2px 5px rgba(23, 32, 51, 0.02);
+}
+
+.password-card {
+    max-width: 560px;
+}
+
+.password-card > h2 {
+    margin-bottom: 10px;
+}
+
+.auth-page {
+    display: grid;
+    min-height: 100vh;
+    place-items: center;
+    background: linear-gradient(135deg, #dff5f1 0%, #f5f7fb 50%, #fff7e8 100%);
+}
+
+.auth-shell {
+    width: min(100% - 32px, 470px);
+    padding: 32px 0;
+}
+
+.auth-panel {
+    padding: clamp(26px, 7vw, 42px);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+}
+
+.auth-brand {
+    margin-bottom: 34px;
+}
+
+.auth-panel h1 {
+    margin-bottom: 8px;
+}
+
+.auth-intro,
+.auth-help {
+    color: var(--muted);
+}
+
+.auth-intro {
+    margin-bottom: 28px;
+}
+
+.auth-help {
+    margin: 20px 0 0;
+    font-size: 0.82rem;
 }
 
 .list-toolbar,
@@ -918,6 +1007,15 @@ h2 {
     .global-search input {
         padding: 8px 10px;
         font-size: 0.88rem;
+    }
+
+    .account-actions {
+        gap: 8px;
+        font-size: 0.8rem;
+    }
+
+    .account-name {
+        display: none;
     }
 
     .menu-toggle {

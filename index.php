@@ -8,6 +8,7 @@ $statistics = ['continentes' => 0, 'paises' => 0, 'cidades' => 0, 'governantes' 
 $topCities = [];
 $citiesByContinent = [];
 $countryHighlights = [];
+$canManageRecords = is_administrator();
 
 try {
     $statistics = $pdo->query("SELECT
@@ -46,12 +47,16 @@ render_header('Visão geral', 'dashboard');
     <div>
         <p class="eyebrow">Painel geográfico</p>
         <h1>Seu mapa de dados começa aqui.</h1>
-        <p>Cadastre continentes, países, cidades e governantes em uma base organizada e conectada.</p>
+        <p><?= $canManageRecords
+            ? 'Cadastre continentes, países, cidades e governantes em uma base organizada e conectada.'
+            : 'Consulte continentes, países, cidades e governantes em uma base organizada e conectada.' ?></p>
     </div>
-    <div class="quick-actions" aria-label="Ações rápidas">
-        <a class="button button-primary" href="<?= e(form_url('paises')) ?>">+ Novo país</a>
-        <a class="button button-secondary" href="<?= e(form_url('cidades')) ?>">+ Nova cidade</a>
-    </div>
+    <?php if ($canManageRecords): ?>
+        <div class="quick-actions" aria-label="Ações rápidas">
+            <a class="button button-primary" href="<?= e(form_url('paises')) ?>">+ Novo país</a>
+            <a class="button button-secondary" href="<?= e(form_url('cidades')) ?>">+ Nova cidade</a>
+        </div>
+    <?php endif; ?>
 </section>
 
 <?php if (isset($dashboardError)): ?>
@@ -62,22 +67,22 @@ render_header('Visão geral', 'dashboard');
     <a class="stat-card" href="<?= e(url('continentes.php')) ?>">
         <span class="stat-label">Continentes</span>
         <strong><?= number_format((int) $statistics['continentes'], 0, ',', '.') ?></strong>
-        <span>Gerenciar registros →</span>
+        <span><?= $canManageRecords ? 'Gerenciar registros →' : 'Consultar registros →' ?></span>
     </a>
     <a class="stat-card" href="<?= e(url('paises.php')) ?>">
         <span class="stat-label">Países</span>
         <strong><?= number_format((int) $statistics['paises'], 0, ',', '.') ?></strong>
-        <span>Gerenciar registros →</span>
+        <span><?= $canManageRecords ? 'Gerenciar registros →' : 'Consultar registros →' ?></span>
     </a>
     <a class="stat-card" href="<?= e(url('cidades.php')) ?>">
         <span class="stat-label">Cidades</span>
         <strong><?= number_format((int) $statistics['cidades'], 0, ',', '.') ?></strong>
-        <span>Gerenciar registros →</span>
+        <span><?= $canManageRecords ? 'Gerenciar registros →' : 'Consultar registros →' ?></span>
     </a>
     <a class="stat-card" href="<?= e(url('governantes.php')) ?>">
         <span class="stat-label">Governantes</span>
         <strong><?= number_format((int) $statistics['governantes'], 0, ',', '.') ?></strong>
-        <span>Gerenciar registros →</span>
+        <span><?= $canManageRecords ? 'Gerenciar registros →' : 'Consultar registros →' ?></span>
     </a>
 </section>
 

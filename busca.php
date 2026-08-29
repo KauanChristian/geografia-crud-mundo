@@ -34,13 +34,19 @@ function search_geography(PDO $pdo, string $query): array
     $cityStatement->execute(['term' => $term]);
     $cities = $cityStatement->fetchAll();
 
+    $canManageRecords = is_administrator();
+
     foreach ($countries as &$country) {
-        $country['url'] = form_url('paises', (int) $country['id']);
+        $country['url'] = $canManageRecords
+            ? form_url('paises', (int) $country['id'])
+            : url(entity_page('paises'));
     }
     unset($country);
 
     foreach ($cities as &$city) {
-        $city['url'] = form_url('cidades', (int) $city['id']);
+        $city['url'] = $canManageRecords
+            ? form_url('cidades', (int) $city['id'])
+            : url(entity_page('cidades'));
     }
     unset($city);
 

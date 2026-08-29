@@ -1,4 +1,4 @@
--- Dados opcionais para demonstrar a aplicação após importar bd_mundo.sql.
+-- Dados opcionais para demonstrar a aplicação após importar bd_mundo1.sql.
 -- Pode ser executado mais de uma vez; os registros duplicados são ignorados.
 
 USE bd_mundo;
