@@ -1,79 +1,304 @@
-**Nome do Aluno**
-Kauan Christian Barbosa dos Santos
+# G.I.S — Geografia Incremental Simples
 
-**Nome do Projeto**
-G.I.S — Geografia Incremental Simples
+## Sobre o projeto
 
-**Descrição Do Projeto**
-O projeto é uma aplicação web completa para gerenciamento de informações geográficas do mundo. O sistema permite cadastrar, consultar, editar e excluir continentes, países, cidades e governantes, mantendo os dados organizados em um banco MySQL chamado `bd_mundo`.
+**Aluno:** Kauan Christian Barbosa dos Santos
 
-A aplicação foi desenvolvida com uma estrutura simples e funcional, separando a interface visual, os scripts PHP e os arquivos do banco de dados. O usuário pode navegar pelas páginas do sistema, visualizar listas de registros, realizar buscas e gerenciar as informações por meio de formulários.
+O **G.I.S — Geografia Incremental Simples** é uma aplicação web desenvolvida para o gerenciamento de informações geográficas do mundo.
 
-**Instalação E Uso**
-Para executar o projeto, é necessário ter um servidor local com suporte a PHP e MySQL, como XAMPP.
+O sistema permite cadastrar, consultar, editar e excluir informações relacionadas a **continentes, países, cidades e governantes**, mantendo os dados organizados em um banco de dados MySQL denominado `bd_mundo`.
 
-Primeiro, extraia o arquivo do projeto e coloque a pasta dentro do diretório do servidor local. No XAMPP, por exemplo, a pasta deve ficar em:
+O projeto foi desenvolvido com uma estrutura simples e organizada, separando a interface da aplicação, a lógica em PHP e os arquivos relacionados ao banco de dados. O usuário pode navegar pelas páginas do sistema, consultar registros, realizar buscas e gerenciar informações por meio de formulários.
 
-`C:\xampp\htdocs\mundo-crud-php-mysql`
+## Funcionalidades
 
-Depois, abra o painel do XAMPP e inicie os serviços `Apache` e `MySQL`.
+* Cadastro, consulta, edição e exclusão de continentes.
+* Cadastro, consulta, edição e exclusão de países.
+* Cadastro, consulta, edição e exclusão de cidades.
+* Cadastro, consulta, edição e exclusão de governantes.
+* Associação entre continentes, países, cidades e governantes.
+* Pesquisa dinâmica de países e cidades pelo nome.
+* Página inicial com estatísticas do banco de dados.
+* Controle de acesso por tipo de usuário.
+* Registro de eventos de autenticação no sistema.
+* Validações para manter a integridade dos dados.
+* Proteção contra exclusões que possam gerar registros órfãos.
 
-Em seguida, acesse o phpMyAdmin pelo navegador:
+## Interface do sistema
 
-`http://localhost/phpmyadmin`
+As imagens abaixo apresentam algumas das principais telas da aplicação.
 
-Crie/importe o banco de dados usando o arquivo:
+### Tela inicial
 
-`database/bd_mundo1.sql`
+`assets/screenshots/dashboard.png`
 
-Depois, se quiser testar o sistema já com informações cadastradas, importe também:
+### Tela de cadastro
 
-`database/dados_exemplo.sql`
+`assets/screenshots/cadastro.png`
 
-Com o banco criado e o servidor ligado, acesse o sistema pelo navegador:
+### Tela de consulta
 
-`http://localhost/mundo-crud-php-mysql/`
+`assets/screenshots/consulta.png`
 
-O arquivo `index.php` não deve ser aberto diretamente com duplo clique, pois arquivos PHP precisam ser executados por um servidor.
+## Tecnologias utilizadas
 
-**Autenticação**
+* **HTML5** — estrutura das páginas.
+* **CSS3** — estilização e responsividade da interface.
+* **JavaScript** — validações, confirmações de exclusão e pesquisas dinâmicas.
+* **PHP** — lógica da aplicação e comunicação com o banco de dados.
+* **MySQL** — armazenamento e gerenciamento das informações.
+* **PDO** — conexão e execução de consultas ao banco de dados.
+* **Git** — controle de versão.
+* **GitHub** — armazenamento e versionamento do projeto.
 
-Após importar `database/bd_mundo1.sql`, o banco já inclui as seguintes contas de demonstração. Todas entram com `primeiro_acesso` ativo e, após um login bem-sucedido, são direcionadas obrigatoriamente à tela de troca de senha. A nova senha é armazenada como hash no banco e o campo `primeiro_acesso` passa a ser `0`.
+## Estrutura do projeto
 
-(como o site ainda não possui tela de cadastro, utilize esses usuario pré-definidos)
-| Usuário | Senha inicial | Tipo |
-| --- | --- | --- |
-| `admin` | `SenhaInicial0` | Administrador |
-| `ana.souza` | `SenhaInicial1` | Usuário |
-| `bruno.lima` | `SenhaInicial2` | Usuário |
-| `carla.mendes` | `SenhaInicial3` | Usuário |
+A organização dos arquivos foi separada de acordo com suas responsabilidades:
 
-A nova senha deve ter pelo menos oito caracteres, uma letra maiúscula, uma minúscula e um número.
+```text
+geografia-crud-mundo/
+│
+├── assets/
+│   └── arquivos visuais e recursos da interface
+│
+├── backend/
+│   ├── actions/
+│   │   └── ações e operações do sistema
+│   │
+│   ├── config/
+│   │   └── configurações e conexão com o banco
+│   │
+│   └── includes/
+│       └── autenticação, validações e componentes reutilizáveis
+│
+├── database/
+│   ├── bd_mundo1.sql
+│   ├── dados_exemplo.sql
+│   ├── usuarios_exemplo.sql
+│   └── atualizar_senha_admin.sql
+│
+├── arquivos PHP da aplicação
+│
+├── .gitignore
+└── README.md
+```
 
-Somente contas do tipo **Administrador** podem criar, editar ou excluir registros. Os demais usuários têm acesso apenas à consulta das informações.
+A separação das pastas facilita a localização dos arquivos e contribui para a manutenção e compreensão do projeto.
 
-Para adicionar essas contas a um banco que já havia sido criado anteriormente, importe também `database/usuarios_exemplo.sql`.
+## Requisitos
 
-Para redefinir a senha de um administrador já existente para `SenhaInicial0`, execute `database/atualizar_senha_admin.sql`.
+Para executar o sistema localmente, é necessário possuir:
 
-Por segurança, três senhas incorretas consecutivas bloqueiam a conta. Para liberar um usuário bloqueado, um administrador deve atualizar o registro em `usuarios`, zerando `tentativas_falhas` e definindo `bloqueado_em` como `NULL`. Os eventos de login, bloqueio, logout e troca de senha ficam registrados na tabela `logs`.
+* **XAMPP** ou outro servidor local compatível com PHP.
+* **Apache**.
+* **MySQL**.
+* **PHP**.
+* **Navegador web**.
 
-**Tecnologias Utilizadas**
-O projeto utiliza `HTML5` para estruturar as páginas, `CSS3` para estilização e responsividade, `JavaScript` para validações, confirmações de exclusão e pesquisa dinâmica, `PHP` para a lógica do sistema e comunicação com o banco, e `MySQL` para armazenamento dos dados.
+O projeto foi desenvolvido para execução em ambiente local.
 
-A conexão com o banco é feita usando `PDO`, o que torna as consultas mais seguras. O sistema também utiliza validações no servidor, proteção por token CSRF em formulários e consultas SQL preparadas para reduzir riscos de falhas e injeção de SQL.
+## Como executar
 
-**Descrição Detalhada**
-A aplicação possui quatro módulos principais: continentes, países, cidades e governantes.
+### 1. Baixar o projeto
 
-No módulo de continentes, é possível cadastrar informações como nome, população, área em km² e total de países. O total de países é atualizado automaticamente pelo banco de dados por meio de gatilhos.
+Extraia ou clone o repositório dentro do diretório do servidor local.
 
-No módulo de países, cada país é vinculado a um continente existente. São cadastradas informações como nome, população, área, idioma, clima, regime político e moeda.
+No XAMPP, a pasta deve ficar em:
 
-No módulo de cidades, cada cidade é associada a um país. O cadastro inclui nome, população, área, clima e data de fundação.
+```text
+C:\xampp\htdocs\geografia-crud-mundo
+```
 
-No módulo de governantes, o sistema permite cadastrar governantes associados a um país ou a uma cidade. O cadastro inclui nome, partido político, data de nascimento, idade, data de início do mandato e data final do mandato.
+### 2. Iniciar o servidor
 
-O sistema também possui uma página inicial com estatísticas, como quantidade de registros, cidades mais populosas, total de cidades por continente e cidade mais populosa de cada país. Além disso, existe uma busca dinâmica que permite pesquisar países e cidades pelo nome.
+Abra o painel do XAMPP e inicie os serviços:
 
-As exclusões respeitam a integridade referencial do banco. Por exemplo, não é permitido excluir um país que ainda possui cidades vinculadas, nem excluir uma cidade ou país que possui governante associado. Isso evita registros órfãos e mantém o banco consistente.
+```text
+Apache
+MySQL
+```
+
+### 3. Criar o banco de dados
+
+Acesse o phpMyAdmin pelo navegador:
+
+```text
+http://localhost/phpmyadmin
+```
+
+Importe o arquivo:
+
+```text
+database/bd_mundo1.sql
+```
+
+Esse script cria o banco de dados `bd_mundo`, suas tabelas, relacionamentos, restrições e estruturas necessárias para o funcionamento da aplicação.
+
+### 4. Inserir dados de exemplo
+
+Para executar o sistema com registros já cadastrados para testes, importe também:
+
+```text
+database/dados_exemplo.sql
+```
+
+### 5. Acessar a aplicação
+
+Depois de iniciar o Apache e o MySQL, acesse:
+
+```text
+http://localhost/geografia-crud-mundo/
+```
+
+O arquivo `index.php` deve ser executado através do servidor Apache. Portanto, ele não deve ser aberto diretamente com duplo clique no computador.
+
+## Autenticação
+
+Atualmente, o sistema ainda não possui uma tela de cadastro de novos usuários. Por isso, o banco de dados disponibiliza contas de demonstração pré-definidas para permitir o acesso durante os testes e a apresentação do projeto.
+
+As credenciais abaixo são **fictícias, exclusivamente para demonstração e de uso temporário**. Elas serão alteradas posteriormente antes de uma utilização definitiva do sistema.
+
+| Usuário        | Senha inicial   | Tipo          |
+| -------------- | --------------- | ------------- |
+| `admin`        | `SenhaInicial0` | Administrador |
+| `ana.souza`    | `SenhaInicial1` | Usuário       |
+| `bruno.lima`   | `SenhaInicial2` | Usuário       |
+| `carla.mendes` | `SenhaInicial3` | Usuário       |
+
+Todas as contas iniciam com `primeiro_acesso` ativo. Após o primeiro login, o usuário é direcionado obrigatoriamente para a alteração da senha.
+
+A nova senha deve possuir:
+
+* pelo menos 8 caracteres;
+* uma letra maiúscula;
+* uma letra minúscula;
+* um número.
+
+As novas senhas são armazenadas no banco de dados utilizando hash.
+
+### Permissões
+
+As contas possuem diferentes níveis de acesso:
+
+**Administrador**
+
+* Pode cadastrar registros.
+* Pode editar registros.
+* Pode excluir registros.
+* Pode consultar as informações.
+
+**Usuário**
+
+* Pode consultar as informações.
+* Não pode cadastrar, editar ou excluir registros.
+
+Para adicionar as contas de demonstração a um banco que já tenha sido criado anteriormente, pode ser utilizado:
+
+```text
+database/usuarios_exemplo.sql
+```
+
+Para redefinir a senha inicial do administrador durante os testes, pode ser utilizado:
+
+```text
+database/atualizar_senha_admin.sql
+```
+
+O sistema também possui mecanismos de proteção contra tentativas consecutivas de acesso incorreto. Após três tentativas incorretas, a conta é bloqueada até que um administrador realize a liberação.
+
+Os eventos relacionados a login, bloqueio, logout e alteração de senha são registrados na tabela `logs`.
+
+## Segurança
+
+A aplicação utiliza alguns mecanismos para aumentar a segurança e a integridade dos dados:
+
+* Utilização de **PDO** para conexão com o banco.
+* Consultas SQL preparadas.
+* Validações realizadas no servidor.
+* Proteção por **token CSRF** em formulários.
+* Controle de acesso baseado no tipo de usuário.
+* Armazenamento de senhas utilizando hash.
+* Controle de tentativas de login.
+* Registro de eventos na tabela de logs.
+* Restrições e chaves estrangeiras no banco de dados.
+
+As credenciais apresentadas neste README são contas de demonstração temporárias utilizadas exclusivamente porque o sistema ainda não possui cadastro de usuários. Elas deverão ser substituídas antes de uma utilização definitiva.
+
+## Descrição detalhada
+
+### Continentes
+
+No módulo de continentes, é possível cadastrar informações como:
+
+* nome;
+* população;
+* área em km²;
+* quantidade de países.
+
+A quantidade de países pode ser atualizada automaticamente pelo banco de dados por meio de gatilhos.
+
+### Países
+
+Cada país é associado a um continente existente.
+
+O cadastro pode incluir:
+
+* nome;
+* população;
+* área;
+* idioma;
+* clima;
+* regime político;
+* moeda.
+
+### Cidades
+
+Cada cidade é associada a um país.
+
+O cadastro possui informações como:
+
+* nome;
+* população;
+* área;
+* clima;
+* data de fundação.
+
+### Governantes
+
+O sistema permite cadastrar governantes associados a um país ou a uma cidade.
+
+Entre as informações cadastradas estão:
+
+* nome;
+* partido político;
+* data de nascimento;
+* idade;
+* data de início do mandato;
+* data final do mandato.
+
+### Dashboard e consultas
+
+A página inicial apresenta informações estatísticas sobre os registros armazenados no sistema.
+
+Entre os dados apresentados estão:
+
+* quantidade de registros;
+* cidades mais populosas;
+* total de cidades por continente;
+* cidade mais populosa de cada país.
+
+A aplicação também possui uma pesquisa dinâmica para localizar países e cidades pelo nome.
+
+### Integridade dos dados
+
+As exclusões respeitam os relacionamentos definidos no banco de dados.
+
+Por exemplo, um país que possua cidades vinculadas não pode ser excluído, assim como uma cidade ou país que possua um governante associado.
+
+Esse controle evita a criação de registros órfãos e contribui para manter a consistência das informações armazenadas.
+
+## Autor
+
+**Kauan Christian Barbosa dos Santos**
+
+Projeto desenvolvido para o curso de **Desenvolvimento de Sistemas — ETEC**.
