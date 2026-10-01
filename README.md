@@ -40,6 +40,7 @@ O arquivo `index.php` não deve ser aberto diretamente com duplo clique, pois ar
 
 Após importar `database/bd_mundo1.sql`, o banco já inclui as seguintes contas de demonstração. Todas entram com `primeiro_acesso` ativo e, após um login bem-sucedido, são direcionadas obrigatoriamente à tela de troca de senha. A nova senha é armazenada como hash no banco e o campo `primeiro_acesso` passa a ser `0`.
 
+(como o site ainda não possui tela de cadastro, utilize esses usuario pré-definidos)
 | Usuário | Senha inicial | Tipo |
 | --- | --- | --- |
 | `admin` | `SenhaInicial0` | Administrador |
