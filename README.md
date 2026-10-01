@@ -30,15 +30,15 @@ As imagens abaixo apresentam algumas das principais telas da aplicação.
 
 ### Tela inicial
 
-`assets/screenshots/dashboard.png`
+![Tela inicial do sistema](assets/screenshots/dashboard.png)
 
 ### Tela de cadastro
 
-`assets/screenshots/cadastro.png`
+![Tela de cadastro](assets/screenshots/cadastro.png)
 
 ### Tela de consulta
 
-`assets/screenshots/consulta.png`
+![Tela de consulta](assets/screenshots/consulta.png)
 
 ## Tecnologias utilizadas
 
