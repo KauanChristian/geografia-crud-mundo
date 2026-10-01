@@ -1,0 +1,16 @@
+.env
+.env.*
+!.env.example
+
+*.log
+
+.vscode/
+.idea/
+
+.DS_Store
+Thumbs.db
+
+*.tmp
+*.bak
+
+database/*.local.sql
