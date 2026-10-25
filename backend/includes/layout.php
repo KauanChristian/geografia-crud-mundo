@@ -9,6 +9,8 @@ function render_header(string $title, string $active = ''): void
         'paises' => ['label' => 'Países', 'path' => 'paises.php'],
         'cidades' => ['label' => 'Cidades', 'path' => 'cidades.php'],
         'governantes' => ['label' => 'Governantes', 'path' => 'governantes.php'],
+        'mapa' => ['label' => 'Mapa', 'path' => 'mapa.php'],
+
     ];
     $user = current_user();
     $flashes = pull_flashes();

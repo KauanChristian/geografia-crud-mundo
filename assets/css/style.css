@@ -438,6 +438,44 @@ h2 {
     box-shadow: 0 2px 5px rgba(23, 32, 51, 0.02);
 }
 
+.map-card {
+    padding: 0;
+    overflow: hidden;
+}
+
+.map-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 24px 28px;
+}
+
+.map-card-header h2,
+.map-card-header p {
+    margin-bottom: 0;
+}
+
+.map-card-header p,
+.map-fallback {
+    color: var(--muted);
+}
+
+.google-map {
+    min-height: 500px;
+    background: var(--surface-muted);
+}
+
+.google-map > p {
+    margin: 0;
+    padding: 24px 28px;
+    color: var(--muted);
+}
+
+.map-fallback {
+    padding: 0 28px 24px;
+}
+
 .password-card {
     max-width: 560px;
 }
@@ -1074,6 +1112,24 @@ h2 {
     .form-card {
         padding: 18px;
         border-radius: 12px;
+    }
+    
+    .map-card {
+        padding: 0;
+    }
+
+    .map-card-header {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 18px;
+    }
+
+    .map-card-header .button {
+        width: 100%;
+    }
+
+    .google-map {
+        min-height: 360px;
     }
 
     .form-grid,
