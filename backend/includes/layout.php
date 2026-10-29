@@ -7,10 +7,10 @@ function render_header(string $title, string $active = ''): void
         'dashboard' => ['label' => 'Visão geral', 'path' => 'index.php'],
         'continentes' => ['label' => 'Continentes', 'path' => 'continentes.php'],
         'paises' => ['label' => 'Países', 'path' => 'paises.php'],
+        'api-paises' => ['label' => 'Importar países', 'path' => 'api_paises.php'],
         'cidades' => ['label' => 'Cidades', 'path' => 'cidades.php'],
         'governantes' => ['label' => 'Governantes', 'path' => 'governantes.php'],
         'mapa' => ['label' => 'Mapa', 'path' => 'mapa.php'],
-
     ];
     $user = current_user();
     $flashes = pull_flashes();
